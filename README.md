@@ -1,5 +1,6 @@
 # Pattern matching to Dart
 
+### Multiple returs
 ### Before
 ```dart
     List<Object> userInfo(Map<String, dynamic> json) {
@@ -27,5 +28,39 @@
     main(){
       var (name, age) = userInfo(json);
     }
+
+```
+
+
+### Control flow in argument lists
+### Before
+```dart
+    ListTile(
+     leading: const Icon(Icons.weekend),
+     title: const Text('Welcome'),
+     enabled: hasNextStep,
+     subtitle: hasNextStep ? const Text('Tap to Advanced') : null,
+     onTap: hasNextStep ? () { advance(); } : null,
+     traling: hasNextStep ? null : const Icon(Icons.stop),
+    )
+
+
+```
+### After
+```dart
+
+  ListTile(
+     leading: const Icon(Icons.weekend),
+     title: const Text('Welcome'),
+     enabled: hasNextStep,
+     if(hasNextStep) ...(
+     subtitle:  const Text('Tap to Advanced'),
+     onTap: () { advance(); },
+     ) else ...(
+     traling: const Icon(Icons.stop),
+     )
+    )
+
+
 
 ```
