@@ -1,6 +1,6 @@
 # Pattern matching to Dart
 
-### Multiple returs
+### Multiple returns
 ### Before
 
 ```dart
