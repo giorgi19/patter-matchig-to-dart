@@ -98,3 +98,40 @@ switch(json){
 }
 
 ```
+
+### Usable Switches
+### Before
+```dart
+switch (charCode) {
+    case slash:
+        if (nextCharCode == slash) {
+            skipComment();
+        } else {
+            operator (charCode);
+        }   
+        break;
+    case star:
+    case plus:
+    case minus:
+        operator(charCode);
+        break;
+    }
+    default:
+        if (charCode >= digito && charCode <= digit9) {
+            number();
+        } else {
+            invalid();
+       }
+       break;
+  }
+```
+
+### After
+```dart
+var token = switch (charCode) {
+ slash when nextCharCode == slash => skipComment(),
+ slash || star || plus || minus   => operator(charCode),
+ >= digit0 && <= digit9            => number(),
+ -                                 => throw invalid()
+};
+```
